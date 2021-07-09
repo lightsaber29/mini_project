@@ -26,5 +26,7 @@ public class Member {
 	private int mstate;
 	private String mtel;
 	
-	
+	public Member(Long mno) {
+		this.mno = mno;
+	}
 }
