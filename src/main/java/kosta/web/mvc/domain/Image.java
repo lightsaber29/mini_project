@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -21,6 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Image {
 	
+	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "image_seq")
 	@SequenceGenerator(sequenceName = "image_seq", allocationSize = 1, name = "image_seq")
 	private Long imageNo;

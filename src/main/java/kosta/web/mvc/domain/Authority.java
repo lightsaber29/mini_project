@@ -1,5 +1,7 @@
 package kosta.web.mvc.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,7 +13,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Authority {
+public class Authority implements Serializable {
 
 	@Id
 	@ManyToOne
