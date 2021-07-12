@@ -1,20 +1,22 @@
-<!doctype html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="/img/favicon.png" type="/image/png">
+    <link rel="icon" href="${pageContext.request.contextPath}/img/favicon.png" type="${pageContext.request.contextPath}/image/png">
     <title>Favison SAAS</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/themify-icons.css">
-    <link rel="stylesheet" href="/vendors/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="/vendors/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="/vendors/animate-css/animate.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/vendors/animate-css/animate.css">
     <!-- main css -->
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/responsive.css">
 </head>
 <body>
 
@@ -605,17 +607,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="/js/jquery-2.2.4.min.js"></script>
-<script src="/js/popper.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/vendors/owl-carousel/owl.carousel.min.js"></script>
-<script src="/js/jquery.ajaxchimp.min.js"></script>
-<script src="/js/waypoints.min.js"></script>
-<script src="/js/mail-script.js"></script>
-<script src="/js/contact.js"></script>
-<script src="/js/jquery.form.js"></script>
-<script src="/js/jquery.validate.min.js"></script>
-<script src="/js/mail-script.js"></script>
-<script src="/js/theme.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-2.2.4.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/popper.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.ajaxchimp.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/waypoints.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+<script src="${pageContext.request.contextPath}/js/contact.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.validate.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/mail-script.js"></script>
+<script src="${pageContext.request.contextPath}/js/theme.js"></script>
 </body>
 </html>
