@@ -44,4 +44,11 @@ public class Report {
 	
 	private int reportState;
 
+	public Report(Long reportNo) {
+		super();
+		this.reportNo = reportNo;
+	}
+	
+	
+
 }

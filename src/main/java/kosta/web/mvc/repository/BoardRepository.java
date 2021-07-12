@@ -16,4 +16,12 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 	public Collection<Board> findBySubjectContaining(String subject);
 	
 	public Collection<Board> findByContentContaining(String content);
+	
+	@Query("update Board b set  b.readnum=b.readnum+1 where b.bno=?1")
+	@Modifying
+	void readnumUpdate(Long bno);
+	
+	@Query("update Board b set  b.recommend=b.recommend+1 where b.bno=?1")
+	@Modifying
+	void recommendUpdate(Long bno);
 }

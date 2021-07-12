@@ -9,20 +9,16 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @Configuration
 public class TilesConfig {
 
-	@Bean
-	public TilesConfigurer tilesConfigurer() {
-		final TilesConfigurer configurer = new TilesConfigurer();
-		
-		// tiles 위치
-		configurer.setDefinitions(new String[] {"/WEB-INF/views/tiles/tiles.xml"});
-		configurer.setCheckRefresh(true);
-		return configurer;
-	}
-	
-	@Bean
-	public TilesViewResolver tilesViewResolver() {
-		final TilesViewResolver tilesViewResolver = new TilesViewResolver();
-		tilesViewResolver.setViewClass(TilesView.class);
-		return tilesViewResolver;
-	}
+	/*
+	 * @Bean public TilesConfigurer tilesConfigurer() { final TilesConfigurer
+	 * configurer = new TilesConfigurer();
+	 * 
+	 * // tiles 위치 configurer.setDefinitions(new String[]
+	 * {"/WEB-INF/views/tiles/tiles.xml"}); configurer.setCheckRefresh(true); return
+	 * configurer; }
+	 * 
+	 * @Bean public TilesViewResolver tilesViewResolver() { final TilesViewResolver
+	 * tilesViewResolver = new TilesViewResolver();
+	 * tilesViewResolver.setViewClass(TilesView.class); return tilesViewResolver; }
+	 */
 }

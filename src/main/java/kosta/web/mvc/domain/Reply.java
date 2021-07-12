@@ -40,4 +40,10 @@ public class Reply {
 	private String replyContent;
 	@CreationTimestamp
 	private LocalDateTime replyRegdate;
+	public Reply(Long rno) {
+		super();
+		this.rno = rno;
+	}
+	
+	
 }

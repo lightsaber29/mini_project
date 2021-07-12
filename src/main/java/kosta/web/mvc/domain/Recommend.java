@@ -34,5 +34,11 @@ public class Recommend {
 	@ManyToOne
 	@JoinColumn(name = "bno")
 	private Board board;
+
+	public Recommend(Long recommendNo) {
+		super();
+		this.recommendNo = recommendNo;
+	}
+	
 	
 }
