@@ -49,7 +49,7 @@ public class BoardTest {
 	//글 등록
 	@Test
 	public void insert() {
-		bRep.save(new Board(null, "제목", "내용", null, 0, 0, new Member(21070701L)));
+		bRep.save(new Board(null, "aaaa", "내용", null, 0, 0, new Member(21070701L)));
 	}
 	//글 수정
 	@Test
@@ -68,7 +68,7 @@ public class BoardTest {
 	}
 	//글 조건검색
 	//작성자
-	@Test
+	/*@Test
 	public void selectByMember() {
 		List<Board>list = bRep.findByMemberMno(21070701L);
 		System.out.println("개수 : "+ list.size());
@@ -85,7 +85,7 @@ public class BoardTest {
 	public void selectByContent() {
 		Collection<Board> bb = bRep.findByContentContaining("내");
 		bb.forEach(b->System.out.println(b));
-	}
+	}*/
 	
 	//글 삭제
 	@Test
@@ -101,14 +101,14 @@ public class BoardTest {
 	//추천수 증가
 	@Test
 	public void reco() {
-		bRep.recommendUpdate(2L);
+		bRep.recommendIncrease(2L);
 	}
 	
 	////////////////////////////////////////////
 	//답변등록
 	@Test
 	public void aa() {
-		rRep.save(new Reply(null, new Board(21L), new Member(21070701L), "댓글", null));
+		rRep.save(new Reply(null, new Board(61L), new Member(21070701L), "댓글", null));
 	}
 	//답변수정
 	@Test
@@ -123,12 +123,12 @@ public class BoardTest {
 	}
 	
 	//글에 해당하는 답변목록
-	@Test
+	/*@Test
 	public void replyList() {
 		List<Reply> list = rRep.findByBoardBno(2L);
 		System.out.println("개수 : "+list.size());
 		list.forEach(re->System.out.println(re));
-	}
+	}*/
 	
 	//////////////////////////////////////////
 	//추천을 누르면 추천수 +1 그리고 추천테이블에 추천인이랑 글번호가 등록

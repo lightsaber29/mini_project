@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -46,6 +47,7 @@ public class Board {
 	private Member member;
 	
 	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+	@OrderBy("replyRegdate desc")
 	private List<Reply> replyList;
 	
 	@OneToMany(mappedBy = "board", cascade = CascadeType.ALL)

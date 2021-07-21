@@ -28,7 +28,7 @@ $(document).ready(function(){
                     required: true,
                     email: true
                 },
-                message: {
+                content: {
                     required: true,
                     minlength: 20
                 }
@@ -49,7 +49,7 @@ $(document).ready(function(){
                 email: {
                     required: "no email, no message"
                 },
-                message: {
+                content: {
                     required: "um...yea, you have to write something to send this form.",
                     minlength: "thats all? really?"
                 }
