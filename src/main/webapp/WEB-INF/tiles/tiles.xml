@@ -2,10 +2,17 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
-<!-- <tiles-definitions>
+<tiles-definitions>
 
 	<definition name="layout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="cssList" value="/WEB-INF/views/common/cssList.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+		<put-attribute name="jsList" value="/WEB-INF/views/common/jsList.jsp"/>
+	</definition>
 	
+	<definition name="*" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
 	</definition>
 
-</tiles-definitions> -->
+</tiles-definitions>
