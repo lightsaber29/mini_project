@@ -114,7 +114,7 @@
 						<c:forEach items="${pageList.content}" var="board">
 							<article class="blog_item">
 	                        <div class="blog_item_img">
-	                          <img class="card-img rounded-0" src="img/blog/main-blog/m-blog-1.jpg" alt="">
+	                          <img class="card-img rounded-0" src="${pageContext.request.contextPath}/save/${board.imageList[0].imagePath}" alt="">
 	                          <a href="#" class="blog_item_date">
 	                            <fmt:parseDate var="parseDate" pattern="yyyy-MM-dd'T'HH:mm:ss" value="${board.regdate}" type="both" /> 
 	                            <h3><fmt:formatDate value="${parseDate}" pattern="dd" /></h3>

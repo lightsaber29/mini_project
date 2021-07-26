@@ -32,4 +32,11 @@ public class Image {
 	private Board board;
 	
 	private String imagePath;
+
+	public Image(String imagePath) {
+		super();
+		this.imagePath = imagePath;
+	}
+	
+	
 }

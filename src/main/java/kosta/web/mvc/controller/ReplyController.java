@@ -2,6 +2,7 @@ package kosta.web.mvc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -57,5 +58,13 @@ public class ReplyController {
 	public String delete(@PathVariable Long rno, @PathVariable Long bno) {
 		replyService.delete(rno);
 		return "redirect:/board/detail/"+bno+"?flag=1";
+	}
+	
+	/**
+	 * 예외처리
+	 * */
+	@ExceptionHandler(RuntimeException.class)
+	public ModelAndView error(RuntimeException e) {
+		return new ModelAndView("error/errorView", "errMsg",e.getMessage());
 	}
 }

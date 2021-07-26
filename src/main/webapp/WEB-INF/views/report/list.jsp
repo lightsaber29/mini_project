@@ -6,26 +6,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$("#deleteBtn").click(function(){
-			if(!confirm("삭제하시겠습니까? \n삭제 시 복구되지 않습니다.")){
-				$(this).attr("href", "#")
-			}else{
-				alert("삭제되었습니다.")
-				$(this).attr("href", "${pageContext.request.contextPath}/board/delete/${board.bno}")
-			}
-					
-		})
-		$("#updateBtn").click(function(){
-			if(!confirm("수정하시겠습니까? \n수정 시 등록된 이미지는 삭제됩니다.")){
-				$(this).attr("href", "#")
-			}else{
-				$(this).attr("href", "${pageContext.request.contextPath}/board/updateForm/${board.bno}")
-			}
-		})
+	$(function(){
+		/*$("#accordionBtn").on("click", function(){
+			var classval = $(this).attr("class");
+			var classtwo = $("#collapseTwo").attr("class");
+			alert(classval)
+			alert(classtwo)
+		})*/
 	})
 </script>
     <!-- Required meta tags -->
@@ -97,11 +86,11 @@
     <!--================Hero Banner Area Start =================-->
     <section class="hero-banner d-flex align-items-center">
         <div class="container text-center">
-            <h2>Blog Details</h2>
+            <h2>신고 목록</h2>
             <nav aria-label="breadcrumb" class="banner-breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
+                    <li class="breadcrumb-item active" aria-current="page">Price</li>
                 </ol>
             </nav>
         </div>
@@ -109,143 +98,67 @@
     <!--================Hero Banner Area End =================-->
 
 
-    <!--================Blog Area =================-->
-    <section class="blog_area single-post-area area-padding">
+
+    <!--================ Start Faq Area =================-->
+    <section class="faq_area area-padding-bottom mt-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 posts-list">
-                    <div class="single-post">
-                        <div class="feature-img">
-                            <img class="img-fluid" src="img/blog/main-blog/m-blog-1.jpg" alt="">
-                        </div>
-
-						<div class="blog_details">
-						    <h2>${board.subject}</h2>
-						    <ul class="blog-info-link mt-3 mb-4">
-						        <li><i class="far fa-user"></i>${board.member.mname}</li>
-						        <li><a href="#reply"><i class="far fa-comments"></i> 
-						        <fmt:formatNumber value="${fn:length(board.replyList)}" pattern="#,###" />
-						        Comments</a></li>
-						        <li><i class="far fa-clock"></i>${board.regdate}</li>
-						        <li><i class="far fa-eye"></i>${board.readnum} Views</li>
-						        <!-- ${board.member.mno}랑 권한이랑 같을때 -->
-						        <li><a href="${pageContext.request.contextPath}/board/updateForm/${board.bno}" id="updateBtn"><i class="far fa-edit"></i>Update</a></li>
-						        <li><a href="${pageContext.request.contextPath}/board/delete/${board.bno}" id="deleteBtn"><i class="far fa-trash-alt"></i>Delete</a></li>
-						    	<!-- ${board.member.mno}랑 권한이랑 다를때 -->
-						    	<li><a href="${pageContext.request.contextPath}/report/reportForm/${board.bno}"><i class="far fa-flag"></i>신고</a></li>
-						    </ul>
-						    <div class="quote-wrapper">
-						    <c:forEach items="${board.imageList}" var="image">
-						    	<img alt="" src="${pageContext.request.contextPath}/save/${image.imagePath}"><p>
-						    </c:forEach>
-								${board.content}			       
-						    </div>
-						</div>
-					</div>
-					
-					
-<div class="navigation-top">
-    <div class="d-sm-flex justify-content-evenly text-center">
-        <c:choose>
-        	<c:when test="${board.recommend==0}">
-        		<p class="like-info"><span class="align-middle">
-		        <i class="far fa-heart"></i></span>
-		        no one likes this yet</p>
-        	</c:when>
-        	<c:otherwise>
-        		<p class="like-info"><span class="align-middle">
-		        <a href="#"><i class="fas fa-heart"></i></a></span>
-		        ${board.recommend} people likes this</p>
-        	</c:otherwise>
-        </c:choose>
-        
-        <div class="col-sm-4 text-center my-2 my-sm-0">
-            <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 
-          	<fmt:formatNumber value="${fn:length(board.replyList)}" pattern="#,###" />  Comments</p>
-        </div>
-    </div>
-    <div class="d-flex justify-content-end text-center">
-    	<div class="col-sm-2 text-center my-2 my-sm-0">
-          	<a href="${pageContext.request.contextPath}/recommend/insert/${board.bno}" class="genric-btn primary-border small">Like</a>
-        </div>
-        <div class="col-sm-2 text-center my-2 my-sm-0">
-          	<a href="${pageContext.request.contextPath}/recommend/delete/${board.bno}" class="genric-btn success-border small">Like Cancle</a>
-        </div>
-    </div>
-
-</div>
-
-<c:choose>
-	<c:when test="${empty board.replyList}">
-		<div class="comments-area">
-			    <h4><fmt:formatNumber value="${fn:length(board.replyList)}" pattern="#,###" /> Comments</h4>
-			    <div class="comment-list">
-			        <div class="single-comment justify-content-between d-flex">
-			            <div class="user justify-content-between d-flex">
-			            	<div class="desc">
-			                    <p class="comment">등록된 댓글이 없습니다.</p>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-			</div>
-	</c:when>
-	<c:otherwise>
-		<div class="comments-area">
-			<h4><fmt:formatNumber value="${fn:length(board.replyList)}" pattern="#,###" /> Comments</h4>
-			<c:forEach items="${board.replyList}" var="reply">
-			    <div class="comment-list">
-			        <div class="single-comment justify-content-between d-flex">
-			            <div class="user justify-content-between d-flex">
-			            	<div class="desc">
-			                    <p class="comment">${reply.replyContent} </p>
-			                    <div class="d-flex justify-content-between">
-			                        <div class="d-flex align-items-center">
-			                            <h5>${reply.member.mname}</h5>
-			                            <p class="date">
-			                            <fmt:parseDate var="parseDate" pattern="yyyy-MM-dd'T'HH:mm:ss" value="${reply.replyRegdate}" type="both" /> 
-				                        <fmt:formatDate value="${parseDate}" pattern="yyyy.MM.dd" /></p>
-			                        </div>
-			                        <div class="reply-btn">
-			                            <a href="${pageContext.request.contextPath}/reply/updateForm/${reply.rno}" class="btn-reply text-uppercase">edit</a>
-			                        </div>
-			                        
-			                        <div class="reply-btn">
-			                            <a href="${pageContext.request.contextPath}/reply/delete/${reply.rno}/${reply.board.bno}" class="btn-reply text-uppercase">delete</a>
-			                        </div>
-			                    </div>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-			</c:forEach>
-			</div>
-	</c:otherwise>
-</c:choose>
-
-
-<div class="comment-form" id="replyForm">
-    <h4>Leave a Reply</h4>
-    <form class="form-contact comment_form" action="${pageContext.request.contextPath}/reply/insert" id="commentForm">
-        <input type="hidden" name="bno" value="${bno}" />
-        <div class="row">
-            <div class="col-12">
-                <div class="form-group">
-                    <textarea class="form-control w-100" name="replyContent" id="replyContent" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                <div class="col-12">
+                    <div class="area-heading">
+                        <h4>신고 처리 안내</h4>
+                        <p>신고해주신 내용에 대한 결과 안내가 없더라도, 신고된 게시물은 담당자가 확인한 후 사이트 이용약관 및 운영원칙에 따라 적절한 조치를 취하고 있습니다.<br>신고 게시글에 조치를 취한 뒤에는 신고접수가 취소되지 않습니다.
+                        </p>
+                    </div>
                 </div>
+                <div class="col-sm-12 col-lg-12">
+                    <div class="accordion" id="accordionExample">
+						<c:choose>
+							<c:when test="${empty reportList}">
+								<h5>접수된 신고가 없습니다.</h5>
+							</c:when>
+							<c:otherwise>
+							<c:forEach items="${reportList}" var="list">
+								<div class="card">
+									<div class="card-header">
+			                        	<h5 class="mb-0">
+			                            	<button id="accordionBtn" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			                                	제목 : ${list.board.subject}<br>
+			                                	처리상태 : 
+			                                    <c:if test="${list.reportState == 0}">접수</c:if>
+			                                    <c:if test="${list.reportState == 1}">완료</c:if>
+			                                    <c:if test="${list.reportState == 2}">반려</c:if>
+			                                </button>
+			                            </h5>
+			                        </div>
+			                     	<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+			                        	<div class="card-body">
+			                           		신고 내용 : ${list.reportContent}
+			                           	</div>
+			                           	<c:if test="${list.reportState == 0}">
+			                           		<a href="${pageContext.request.contextPath}/report/delete/${list.reportNo}" class="genric-btn default">신고접수 취소</a>
+			                           	</c:if>
+			                           		
+			                        </div>
+	                       	 	</div>
+	                       	 	</c:forEach>
+							</c:otherwise>
+						</c:choose>
+						
+
+                        
+                        
+                        
+                        
+
+                    </div>
+                </div>
+
             </div>
         </div>
-        <div class="form-group">
-            <button type="submit" class="button button-contactForm">Send Message</button>
-        </div>
-    </form>
-</div>
-</div>
+    </section>
+    <!--================ End Faq Area =================-->
 
-</div>
-</div>
-</section>
-<!--================Blog Area end =================-->
+
 
  <!-- ================ start footer Area ================= -->
     <footer class="footer-area">

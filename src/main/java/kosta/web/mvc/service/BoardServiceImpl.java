@@ -28,8 +28,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void insert(Board board) {
+	public Board insert(Board board) {
 		bRep.save(board);
+		return board;
 	}
 
 	@Override
@@ -68,10 +69,6 @@ public class BoardServiceImpl implements BoardService {
 		return bRep.findBySubjectContaining(subject, pageable);
 	}
 	
-	@Override
-	public Page<Reply> replyList(Long bno, Pageable pageable) {
-		return rRep.findByBoardBno(bno, pageable);
-	}
 
 
 	

@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kosta.web.mvc.domain.Board;
+import kosta.web.mvc.domain.Image;
 import kosta.web.mvc.domain.Member;
 import kosta.web.mvc.service.BoardService;
 import kosta.web.mvc.service.ImageService;
@@ -75,7 +76,7 @@ public class BoardController {
 	 * 글 등록
 	 * */
 	@RequestMapping("/insert")
-	public String insert(Board board, MultipartHttpServletRequest mtfRequest, HttpSession session) {
+	public String insert(Board board, MultipartHttpServletRequest mtfRequest) {
 		System.out.println("***************************");
 		String content = board.getContent().replace("<", "&lt;");
 		String subject = board.getSubject().replace("<", "&lt;");
@@ -84,31 +85,30 @@ public class BoardController {
 		//회원정보필요
 		board.setMember(new Member(100L));
 		
-		boardService.insert(board);
+		Board dbBoard = boardService.insert(board);
 		
 		//여기서 이미지업로드 같이 하기
 		List<MultipartFile> fileList = mtfRequest.getFiles("file");
 		System.out.println("있긴하니파일이"+fileList.size());
 		int index = 1;
 		if(fileList != null) {
-			ServletContext application = session.getServletContext();
-			String path = application.getRealPath("/WEB-INF/save/");
+			String path = "C:\\Edu\\Spring\\SpringWork\\mini_project\\src\\main\\resources\\static\\save\\";
 			for(MultipartFile mf : fileList) {
 				String originFileName = mf.getOriginalFilename();
-				String safeFile = path + System.currentTimeMillis() +"_"+index+ "_"+originFileName /*mno추가하기*/;
+				String fileName = System.currentTimeMillis() +"_"+dbBoard.getBno()+"_"+index+"_"+originFileName;
+				String safeFile = path + fileName;  
 				System.out.println("파일경로임당"+safeFile);
 				index++;
 				//이미지 테이블에넣기
 				try {
 					mf.transferTo(new java.io.File(safeFile));
+					imageService.insert(new Image(null, dbBoard, fileName));
 				}catch(Exception e){
 					e.printStackTrace();
 				}
 			}
 			
 		}
-		
-		
 		return "redirect:/board/list";
 		
 	}
@@ -131,20 +131,64 @@ public class BoardController {
 	/**
 	 * 글 수정 폼
 	 * */
-	@RequestMapping("/updateForm")
-	public void updateForm() {}
+	@RequestMapping("/updateForm/{bno}")
+	public ModelAndView updateForm(@PathVariable Long bno) {
+		Board board = boardService.selectBy(bno, false);
+		return new ModelAndView("board/updateForm", "board", board);
+	}
 	
 	/**
 	 * 글 수정
 	 * */
 	@RequestMapping("/update")
-	public void update() {}
+	public String update(Board board, MultipartHttpServletRequest mtfRequest) {
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(board.getContent());
+		System.out.println(board.getSubject());
+		System.out.println(board.getBno());
+		String content = board.getContent().replace("<", "&lt;");
+		String subject = board.getSubject().replace("<", "&lt;");
+		board.setContent(content);
+		board.setSubject(subject);
+		//update 하기 전에 image 삭제하기
+		List<Image> imageList = imageService.selectByBno(board.getBno());
+		if(imageList != null) {
+			imageService.delete(board.getBno());
+		}
+		Board dbBoard = boardService.update(board);
+		//여기서 이미지업로드 같이 하기
+		List<MultipartFile> fileList = mtfRequest.getFiles("file");
+		System.out.println("있긴하니파일이"+fileList.size());
+		int index = 1;
+		if(fileList != null) {
+			String path = "C:\\Edu\\Spring\\SpringWork\\mini_project\\src\\main\\resources\\static\\save\\";
+			for(MultipartFile mf : fileList) {
+				String originFileName = mf.getOriginalFilename();
+				String fileName = System.currentTimeMillis() +"_"+dbBoard.getBno()+"_"+index+"_"+originFileName;
+				String safeFile = path + fileName;  
+				System.out.println("파일경로임당"+safeFile);
+				index++;
+				//이미지 테이블에넣기
+				try {
+					mf.transferTo(new java.io.File(safeFile));
+					imageService.insert(new Image(null, dbBoard, fileName));
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		}
+		return "redirect:/board/list";
+		
+	}
 	
 	/**
 	 * 글 삭제
 	 * */
-	@RequestMapping("/delete")
-	public void delete() {}
+	@RequestMapping("/delete/{bno}")
+	public String delete(@PathVariable Long bno) {
+		boardService.delete(bno);
+		return "redirect:/board/list";
+	}
 	
 	
 	

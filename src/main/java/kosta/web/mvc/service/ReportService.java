@@ -1,5 +1,7 @@
 package kosta.web.mvc.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -26,4 +28,10 @@ public interface ReportService {
 	 * 신고상태 수정
 	 * */
 	void update(Report report);
+	
+	/**
+	 * 내가 한 신고목록
+	 * */
+	List<Report> selectByMem(Long mno);
+	
 }

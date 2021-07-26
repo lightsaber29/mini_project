@@ -19,7 +19,7 @@ public interface BoardService {
 	/**
 	 * 글 등록
 	 * */
-	void insert(Board board);
+	Board insert(Board board);
 	
 	/**
 	 * 글 상세보기
@@ -50,11 +50,6 @@ public interface BoardService {
 	 * 제목 글 검색
 	 * */
 	Page<Board> selectBySubject(String subject, Pageable pageable);
-	
-	/**
-	 * 글에 해당하는 답변목록
-	 * */
-	Page<Reply> replyList(Long bno, Pageable pageable);
 	
 	
 }

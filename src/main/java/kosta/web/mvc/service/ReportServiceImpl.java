@@ -1,5 +1,7 @@
 package kosta.web.mvc.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,11 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Override
 	public void insert(Report report) {
-		rpRep.save(report);
+		if(rpRep.findByMemberMnoAndBoardBno(report.getMember().getMno(), report.getBoard().getBno()) != null) {
+			throw new RuntimeException("신고는 한번만 가능합니다.");
+		}else {
+			rpRep.save(report);
+		}
 	}
 
 	@Override
@@ -39,6 +45,11 @@ public class ReportServiceImpl implements ReportService {
 	public void update(Report report) {
 		Report dbReport = rpRep.findById(report.getReportNo()).orElse(null);
 		dbReport.setReportState(report.getReportState());
+	}
+
+	@Override
+	public List<Report> selectByMem(Long mno) {
+		return rpRep.findByMemberMno(mno);
 	}
 
 }

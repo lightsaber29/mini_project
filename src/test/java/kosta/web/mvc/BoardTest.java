@@ -46,6 +46,12 @@ public class BoardTest {
 	@Autowired
 	private ImageRepository iRep;
 	
+	//시퀀스가져오기
+	/*@Test
+	public void aadfsa() {
+		iRep.insertImage("rddddd");
+	}*/
+	
 	//글 등록
 	@Test
 	public void insert() {
@@ -184,6 +190,13 @@ public class BoardTest {
 		re.setReportState(1);
 	}
 	
+	//신고인에 따른 그거 검색
+	@Test
+	public void aaaaaaaaaaaaaa() {
+		List<Report> list = rpRep.findByMemberMno(100L);
+		System.out.println("개수 : "+list.size());
+		list.forEach(re->System.out.println(re));
+	}
 	/////////////////////////////////////////////
 	
 	//사진등록

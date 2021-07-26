@@ -30,4 +30,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 	@Query("update Board b set  b.recommend=b.recommend-1 where b.bno=?1")
 	@Modifying
 	void recommendDecrease(Long bno);
+	
+	
 }

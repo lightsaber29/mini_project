@@ -6,28 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		$("#deleteBtn").click(function(){
-			if(!confirm("삭제하시겠습니까? \n삭제 시 복구되지 않습니다.")){
-				$(this).attr("href", "#")
-			}else{
-				alert("삭제되었습니다.")
-				$(this).attr("href", "${pageContext.request.contextPath}/board/delete/${board.bno}")
-			}
-					
-		})
-		$("#updateBtn").click(function(){
-			if(!confirm("수정하시겠습니까? \n수정 시 등록된 이미지는 삭제됩니다.")){
-				$(this).attr("href", "#")
-			}else{
-				$(this).attr("href", "${pageContext.request.contextPath}/board/updateForm/${board.bno}")
-			}
-		})
-	})
-</script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -97,11 +75,11 @@
     <!--================Hero Banner Area Start =================-->
     <section class="hero-banner d-flex align-items-center">
         <div class="container text-center">
-            <h2>Blog Details</h2>
+            <h2>Write Form</h2>
             <nav aria-label="breadcrumb" class="banner-breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
+                    <li class="breadcrumb-item active" aria-current="page">Contact</li>
                 </ol>
             </nav>
         </div>
@@ -109,143 +87,46 @@
     <!--================Hero Banner Area End =================-->
 
 
-    <!--================Blog Area =================-->
-    <section class="blog_area single-post-area area-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 posts-list">
-                    <div class="single-post">
-                        <div class="feature-img">
-                            <img class="img-fluid" src="img/blog/main-blog/m-blog-1.jpg" alt="">
-                        </div>
+  <!-- ================ contact section start ================= -->
+  <section class="contact-section area-padding">
+    <div class="container">
 
-						<div class="blog_details">
-						    <h2>${board.subject}</h2>
-						    <ul class="blog-info-link mt-3 mb-4">
-						        <li><i class="far fa-user"></i>${board.member.mname}</li>
-						        <li><a href="#reply"><i class="far fa-comments"></i> 
-						        <fmt:formatNumber value="${fn:length(board.replyList)}" pattern="#,###" />
-						        Comments</a></li>
-						        <li><i class="far fa-clock"></i>${board.regdate}</li>
-						        <li><i class="far fa-eye"></i>${board.readnum} Views</li>
-						        <!-- ${board.member.mno}랑 권한이랑 같을때 -->
-						        <li><a href="${pageContext.request.contextPath}/board/updateForm/${board.bno}" id="updateBtn"><i class="far fa-edit"></i>Update</a></li>
-						        <li><a href="${pageContext.request.contextPath}/board/delete/${board.bno}" id="deleteBtn"><i class="far fa-trash-alt"></i>Delete</a></li>
-						    	<!-- ${board.member.mno}랑 권한이랑 다를때 -->
-						    	<li><a href="${pageContext.request.contextPath}/report/reportForm/${board.bno}"><i class="far fa-flag"></i>신고</a></li>
-						    </ul>
-						    <div class="quote-wrapper">
-						    <c:forEach items="${board.imageList}" var="image">
-						    	<img alt="" src="${pageContext.request.contextPath}/save/${image.imagePath}"><p>
-						    </c:forEach>
-								${board.content}			       
-						    </div>
-						</div>
-					</div>
-					
-					
-<div class="navigation-top">
-    <div class="d-sm-flex justify-content-evenly text-center">
-        <c:choose>
-        	<c:when test="${board.recommend==0}">
-        		<p class="like-info"><span class="align-middle">
-		        <i class="far fa-heart"></i></span>
-		        no one likes this yet</p>
-        	</c:when>
-        	<c:otherwise>
-        		<p class="like-info"><span class="align-middle">
-		        <a href="#"><i class="fas fa-heart"></i></a></span>
-		        ${board.recommend} people likes this</p>
-        	</c:otherwise>
-        </c:choose>
-        
-        <div class="col-sm-4 text-center my-2 my-sm-0">
-            <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 
-          	<fmt:formatNumber value="${fn:length(board.replyList)}" pattern="#,###" />  Comments</p>
+
+      <div class="row">
+        <div class="col-12">
+          <h2 class="contact-title">Update Form</h2>
         </div>
-    </div>
-    <div class="d-flex justify-content-end text-center">
-    	<div class="col-sm-2 text-center my-2 my-sm-0">
-          	<a href="${pageContext.request.contextPath}/recommend/insert/${board.bno}" class="genric-btn primary-border small">Like</a>
-        </div>
-        <div class="col-sm-2 text-center my-2 my-sm-0">
-          	<a href="${pageContext.request.contextPath}/recommend/delete/${board.bno}" class="genric-btn success-border small">Like Cancle</a>
-        </div>
-    </div>
-
-</div>
-
-<c:choose>
-	<c:when test="${empty board.replyList}">
-		<div class="comments-area">
-			    <h4><fmt:formatNumber value="${fn:length(board.replyList)}" pattern="#,###" /> Comments</h4>
-			    <div class="comment-list">
-			        <div class="single-comment justify-content-between d-flex">
-			            <div class="user justify-content-between d-flex">
-			            	<div class="desc">
-			                    <p class="comment">등록된 댓글이 없습니다.</p>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-			</div>
-	</c:when>
-	<c:otherwise>
-		<div class="comments-area">
-			<h4><fmt:formatNumber value="${fn:length(board.replyList)}" pattern="#,###" /> Comments</h4>
-			<c:forEach items="${board.replyList}" var="reply">
-			    <div class="comment-list">
-			        <div class="single-comment justify-content-between d-flex">
-			            <div class="user justify-content-between d-flex">
-			            	<div class="desc">
-			                    <p class="comment">${reply.replyContent} </p>
-			                    <div class="d-flex justify-content-between">
-			                        <div class="d-flex align-items-center">
-			                            <h5>${reply.member.mname}</h5>
-			                            <p class="date">
-			                            <fmt:parseDate var="parseDate" pattern="yyyy-MM-dd'T'HH:mm:ss" value="${reply.replyRegdate}" type="both" /> 
-				                        <fmt:formatDate value="${parseDate}" pattern="yyyy.MM.dd" /></p>
-			                        </div>
-			                        <div class="reply-btn">
-			                            <a href="${pageContext.request.contextPath}/reply/updateForm/${reply.rno}" class="btn-reply text-uppercase">edit</a>
-			                        </div>
-			                        
-			                        <div class="reply-btn">
-			                            <a href="${pageContext.request.contextPath}/reply/delete/${reply.rno}/${reply.board.bno}" class="btn-reply text-uppercase">delete</a>
-			                        </div>
-			                    </div>
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-			</c:forEach>
-			</div>
-	</c:otherwise>
-</c:choose>
-
-
-<div class="comment-form" id="replyForm">
-    <h4>Leave a Reply</h4>
-    <form class="form-contact comment_form" action="${pageContext.request.contextPath}/reply/insert" id="commentForm">
-        <input type="hidden" name="bno" value="${bno}" />
-        <div class="row">
-            <div class="col-12">
+        <div class="col-lg-12">
+          <form class="form-contact contact_form" action="${pageContext.request.contextPath}/board/update" method="post" id="Form" enctype="multipart/form-data">
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+          <input type="hidden" name="bno" value="${board.bno}">
+              <div class="col-12">
                 <div class="form-group">
-                    <textarea class="form-control w-100" name="replyContent" id="replyContent" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                  <input class="form-control" name="subject" id="subject" type="text" value="${board.subject}">
                 </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                    <textarea class="form-control w-100" name="content" id="content" cols="30" rows="9" >${board.content}</textarea>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+					<input multiple="multiple" type="file" name="file" accept=".jpg, .png, .jpeg"/>
+                </div>
+              </div>
             </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="button button-contactForm">Send Message</button>
-        </div>
-    </form>
-</div>
-</div>
+            <div class="form-group mt-3">
+              <button type="submit" class="button button-contactForm">Update</button>
+            </div>
+          </form>
 
-</div>
-</div>
-</section>
-<!--================Blog Area end =================-->
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ contact section end ================= -->
 
  <!-- ================ start footer Area ================= -->
     <footer class="footer-area">
@@ -322,6 +203,37 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!-- ================ End footer Area ================= -->
 
 
+<!--================Contact Success and Error message Area =================-->
+    <div id="success" class="modal modal-message fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <h2>Thank you</h2>
+                    <p>Your message is successfully sent...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals error -->
+
+    <div id="error" class="modal modal-message fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <h2>Sorry !</h2>
+                    <p> Something went wrong </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================End Contact Success and Error message Area =================-->
 
 
 
